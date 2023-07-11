@@ -22,7 +22,7 @@ logOutBtn.addEventListener("click", function () {
 
 let count = 3;
 function logOutCountDown() {
-    document.getElementById("test").innerHTML = count;
+    document.getElementById("logOut").innerHTML = count;
     count -= 1;
     if (count === 0) {
         location.href = "./index.html";
