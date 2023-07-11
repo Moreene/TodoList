@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONLINE TODO LIST</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Tamma+2&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./all.css">
+</head>
+
+<body>
+
+    <div class="front-page">
+        <div class="container h-100">
+            <div class="row justify-content-center align-items-center h-100">
+                <div class="col-lg-6 d-none d-lg-block">
+                    <div class="d-flex justify-content-center justify-content-xl-end">
+                        <img src="./img/left.png" alt="人物Q版圖片" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <main class="row justify-content-center justify-content-xxl-start">
+                        <div class="col-11 col-md-10">
+                            <form action="">
+                                <div class="d-flex justify-content-center mb-3 d-md-none">
+                                    <img src="../img/logo_lg.png" alt="logo" class="img-fluid">
+                                </div>
+                                <h1 class="fs-3 fw-bold text-center mb-4">最實用的線上代辦事項服務</h1>
+                                <div class="row justify-content-center mb-3">
+                                    <div class="col-10 col-xl-9 col-xxl-8">
+                                        <div class="form-group mb-3">
+                                            <label for="Email" class="form-label fw-bold">Email</label>
+                                            <input type="email" class="form-control border-0 py-2 loginEmail" id="Email"
+                                                placeholder="請輸入email">
+                                        </div>
+                                        <div class="form-group mb-4">
+                                            <label for="password" class="form-label fw-bold">Password</label>
+                                            <input type="password" class="form-control border-0 py-2 loginPassword"
+                                                id="password" placeholder="請輸入密碼">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="text-center">
+                                <input type="button" value="登入" class="btn btn-dark px-5 mb-3 loginBtn"
+                                    id="LoginTimeBox">
+                                <div>
+                                    <a href="./signUp.html" class="link-dark fw-bold">註冊帳號</a>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <script src="./js/index.js"></script>
+</body>
+
+</html>
