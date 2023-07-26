@@ -32,7 +32,13 @@ function signUp() {
             nickName.value = "";
             signUpPassword.value = "";
             signUpPasswordAgain.value = "";
-            signUpCountDown();
+            if (response.data.success === false) {
+                return;
+            } else {
+                // 使用localStorage儲存用戶名稱
+                localStorage.setItem("userName", signUpInfo.nickName);
+                countDown();
+            }
         })
         .catch(function (error) {
             console.log(error);
@@ -41,11 +47,8 @@ function signUp() {
 
 //頁面跳轉
 let count = 3;
-function signUpCountDown() {
-    document.getElementById("signUpTimeBox").innerHTML = count;
-    count -= 1;
-    if (count === 0) {
+function countDown() {
+    setTimeout(function () {
         location.href = "./index.html";
-    };
-    setTimeout("signUpCountDown()", 1000);
+    }, count * 1000);
 };

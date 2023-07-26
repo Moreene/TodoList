@@ -26,7 +26,7 @@ function login() {
             if (response.data.success === false) {
                 return;
             } else {
-                loginCountDown();
+                countDown();
             };
         })
         .catch(function (error) {
@@ -36,11 +36,8 @@ function login() {
 
 //頁面跳轉
 let count = 3;
-function loginCountDown() {
-    document.getElementById("LoginTimeBox").innerHTML = count;
-    count -= 1;
-    if (count === 0) {
+function countDown() {
+    setTimeout(function () {
         location.href = "./todoList.html";
-    };
-    setTimeout("loginCountDown()", 1000);
+    }, count * 1000);
 };

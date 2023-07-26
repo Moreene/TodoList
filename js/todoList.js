@@ -1,4 +1,5 @@
 const logOutBtn = document.querySelector(".logOutBtn");
+let userName = document.querySelector(".userName");
 const inputText = document.querySelector(".inputText");
 const addBtn = document.querySelector(".btn_add");
 const list = document.querySelector(".list");
@@ -11,24 +12,12 @@ const pressEnter = function (e) {
     };
 };
 
-let allData = [];
-let showData = [];
+// 使用localStorage帶入用戶名稱
+userName.textContent = localStorage.getItem("userName");
 
-// 登出系統
-logOutBtn.addEventListener("click", function () {
-    alert("即將登出此系統!");
-    logOutCountDown();
-});
-
-let count = 3;
-function logOutCountDown() {
-    document.getElementById("logOut").innerHTML = count;
-    count -= 1;
-    if (count === 0) {
-        location.href = "./index.html";
-    };
-    setTimeout("logOutCountDown()", 1000);
-};
+// 使用localStorage儲存待辦事項，頁面刷新時保留資料
+let allData = JSON.parse(localStorage.getItem('allData')) || [];
+let showData = JSON.parse(localStorage.getItem('showData')) || [];
 
 // 新增資料
 addBtn.addEventListener("click", function (e) {
@@ -48,14 +37,14 @@ function addTodo() {
     };
     allData.unshift(newData);
     renderData(showData);
-    updateData();
+    filterData();
+    localStorage.setItem('allData', JSON.stringify(allData));
 };
 
 inputText.addEventListener("keydown", pressEnter);
 
 // 渲染畫面
 function renderData(todo) {
-
     let str = "";
     todo.forEach(function (item) {
         str += `
@@ -81,34 +70,30 @@ tab.addEventListener("click", function (e) {
         item.classList.remove("active");
     });
     e.target.classList.add("active");
-    updateData();
+    filterData();
 });
 
 // 刪除資料 + 切換打勾功能
 list.addEventListener("click", function (e) {
     let clickedId = e.target.closest("li").getAttribute("data-id");
+    let idx = allData.findIndex(function (item) {
+        return item.id === clickedId
+    });
     if (e.target.classList.contains("delete")) {
         e.preventDefault();
-        let idx = allData.findIndex(function (item) {
-            return item.id === clickedId
-        });
         allData.splice(idx, 1);
     } else {
-        allData.forEach(function (item) {
-            if (item.id === clickedId) {
-                if (item.checked === "") {
-                    item.checked = "checked";
-                } else {
-                    item.checked = "";
-                };
-            };
-        });
+        if (allData[idx].checked === "") {
+            allData[idx].checked = "checked"
+        } else {
+            allData[idx].checked = ""
+        }
     };
-    updateData();
+    filterData();
 });
 
 // tab資料分類
-function updateData() {
+function filterData() {
     if (toggleTab === "all") {
         showData = allData;
     } else if (toggleTab === "work") {
@@ -126,15 +111,31 @@ function updateData() {
     });
     countNum.textContent = workLength.length;
     renderData(showData);
+    // 使用localStorage儲存渲染的待辦事項
+    localStorage.setItem('showData', JSON.stringify(showData));
 };
 
-updateData();
 
 // 清除已完成item
+filterData();
 clearBtn.addEventListener("click", function (e) {
     e.preventDefault();
     allData = allData.filter(function (item) {
         return item.checked === "";
     });
-    updateData();
+    filterData();
 });
+
+// 登出系統
+logOutBtn.addEventListener("click", function () {
+    alert("即將登出此系統!");
+    countDown();
+    localStorage.clear();
+});
+
+let count = 3;
+function countDown() {
+    setTimeout(function () {
+        location.href = "./index.html";
+    }, count * 1000);
+};
